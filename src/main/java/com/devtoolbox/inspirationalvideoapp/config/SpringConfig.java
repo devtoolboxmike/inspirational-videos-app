@@ -7,6 +7,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
@@ -54,6 +55,11 @@ public class SpringConfig {
     public AWSCredentials amazonAWSCredentials() {
         return new BasicAWSCredentials(
                 amazonAWSAccessKey, amazonAWSSecretKey);
+    }
+
+    @Bean
+    public DynamoDB dynamoDB(AmazonDynamoDB amazonDynamoDB) {
+       return new DynamoDB(amazonDynamoDB);
     }
 
 }
