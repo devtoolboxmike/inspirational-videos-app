@@ -40,16 +40,27 @@ public class SetupTableComponent {
 
         List<AttributeDefinition> attributeDefinitions= new ArrayList<>();
         attributeDefinitions.add(new AttributeDefinition().withAttributeName("id").withAttributeType("S"));
+        attributeDefinitions.add(new AttributeDefinition().withAttributeName("type").withAttributeType("S"));
         attributeDefinitions.add(new AttributeDefinition().withAttributeName("voteCount").withAttributeType("N"));
 
         List<KeySchemaElement> keySchema = new ArrayList<>();
         keySchema.add(new KeySchemaElement().withAttributeName("id").withKeyType(KeyType.HASH));
-        keySchema.add(new KeySchemaElement().withAttributeName("voteCount").withKeyType(KeyType.RANGE));
+
+        ProvisionedThroughput ptIndex = new ProvisionedThroughput().withReadCapacityUnits(5L)
+                .withWriteCapacityUnits(5L);
+
+        GlobalSecondaryIndex createTypeVoteCountIndex = new GlobalSecondaryIndex().withIndexName("type-voteCount-index")
+                .withProvisionedThroughput(ptIndex)
+                .withKeySchema(new KeySchemaElement().withAttributeName("type").withKeyType(KeyType.HASH),
+                        new KeySchemaElement().withAttributeName("voteCount").withKeyType(KeyType.RANGE))
+                .withProjection(
+                        new Projection().withProjectionType("ALL"));
 
         CreateTableRequest request = new CreateTableRequest()
                 .withTableName(dynamodbTableName)
                 .withKeySchema(keySchema)
                 .withAttributeDefinitions(attributeDefinitions)
+                .withGlobalSecondaryIndexes(createTypeVoteCountIndex)
                 .withProvisionedThroughput(new ProvisionedThroughput()
                         .withReadCapacityUnits(5L)
                         .withWriteCapacityUnits(5L));

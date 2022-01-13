@@ -1,5 +1,5 @@
-# inspirational-videos-app
-inspirational-videos-app to showcase dynamodb in my tutorial
+# inspirational-inspirationItems-app
+inspirational-inspirationItems-app to showcase dynamodb in my tutorial
 
 ## Helpful commands:
 ```
@@ -7,11 +7,11 @@ aws dynamodb list-tables --endpoint-url http://localhost:8000
 for ^ you should get: 
 {
     "TableNames": [
-        "inspirational-video"
+        "inspirational-item"
     ]
 }
 
-aws dynamodb scan --table-name inspirational-app --endpoint-url http://localhost:8000
+aws dynamodb scan --table-name inspirational-item --endpoint-url http://localhost:8000
 for ^ you should something like:
 {
     "Items": [
@@ -40,4 +40,7 @@ for ^ you should something like:
     "ScannedCount": 1,
     "ConsumedCapacity": null
 }
+
+aws dynamodb get-item --table-name inspirational-item --key '{"id": {"S": "73fe7ef4-ca16-4f8c-8c1b-44ce734ee7da"}}'
+
 ```

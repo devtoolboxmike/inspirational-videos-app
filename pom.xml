@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.devtoolbox</groupId>
-	<artifactId>inspirational-video-app</artifactId>
+	<artifactId>inspirational-inspirationItem-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>inspirational-video-app-dynamodb</name>
-	<description>inspirational-video-app showcasing dynamodb</description>
+	<name>inspirational-inspirationItem-app-dynamodb</name>
+	<description>inspirational-inspirationItem-app showcasing dynamodb</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
