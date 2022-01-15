@@ -43,7 +43,7 @@ public class InspirationItemController {
     }
 
     @GetMapping("/inspiration-item")
-    public List<InspirationItem> getOne() {
+    public List<InspirationItem> getAll() {
         return inspirationItemService.getItems("video", 100);
     }
 }
