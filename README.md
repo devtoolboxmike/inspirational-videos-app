@@ -1,5 +1,32 @@
 # inspirational-inspirationItems-app
-inspirational-inspirationItems-app to showcase dynamodb in my tutorial
+Spring boot app to showcase dynamodb in my tutorial video: [link]()
+
+Rank motivational videos in vote order.
+
+## Steps for running locally
+```
+//Clone onto your machine:
+git clone https://github.com/devtoolboxmike/inspirational-videos-app.git
+cd inspirational-videos-app
+
+//startup dynamodb locally on docker (port 8000)
+docker-compose up
+
+//start spring boot web app
+./mvnw spring-boot:run
+
+//visit UI
+http://localhost:8080/
+```
+
+**Import postman collection**
+Use `devtoolbox-inspirational-video.postman_collection.json` in this project and import it into postman.
+
+Once the collection is in postman run the entire collection, and set the iterations something around 20, or more. 
+
+Now go back to the UI and you should see videos listed with their vote count.
+
+If you get stuck, just view the [tutorial video]()
 
 ## Helpful commands:
 ```
