@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "87d8e34b-7405-4b96-9d78-032d2da18d25",
+		"name": "devtoolbox-inspirational-video",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create inspiration-item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let videos = ",
+							"    ['https://www.youtube.com/watch?v=EctzLTFrktc', ",
+							"    'https://www.youtube.com/watch?v=jUzxY3rgbkI',",
+							"    'https://www.youtube.com/watch?v=jffyqZRIcHc',",
+							"    'https://www.youtube.com/watch?v=TNbj8X1JOes',",
+							"    'https://www.youtube.com/watch?v=1bumPyvzCyo',",
+							"    'https://www.youtube.com/watch?v=YAzTIOy0ID0',",
+							"    'https://www.youtube.com/watch?v=JdsaBRzLnZA']",
+							"",
+							"let jsonData = pm.response.json();",
+							"",
+							"pm.collectionVariables.unset(\"itemId\");",
+							"pm.collectionVariables.set(\"itemId\", jsonData.id);",
+							"",
+							"let videoIndex = Math.floor(Math.random() * 7);",
+							"pm.collectionVariables.set(\"videoUrl\", videos[videoIndex]);",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"submitterUsername\":\"devtoolbox\",\n    \"submitterEmail\":\"devtoolboxmike@gmail.com\",\n    \"url\":\"{{videoUrl}}\",\n    \"type\":\"video\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/inspiration-item",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inspiration-item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Vote",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let zeroOrOne = Math.floor(Math.random() * 2);",
+							"let id = pm.collectionVariables.get(\"itemId\");",
+							"",
+							"if ( zeroOrOne == 0) {",
+							"    console.log(\"made it zeroOrOne\", zeroOrOne)",
+							"    postman.setNextRequest(\"Update Vote\")",
+							"}",
+							"",
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/inspiration-item/upvote/{{itemId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inspiration-item",
+						"upvote",
+						"{{itemId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET inspiration-item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/inspiration-item/{{itemId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inspiration-item",
+						"{{itemId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL inspiration-item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/inspiration-item",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"inspiration-item"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "videoUrl",
+			"value": "https://www.youtube.com/watch?v=Kxvp3eOYphY"
+		},
+		{
+			"key": "itemId",
+			"value": ""
+		}
+	]
+}

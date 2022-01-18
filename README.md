@@ -43,4 +43,7 @@ for ^ you should something like:
 
 aws dynamodb get-item --table-name inspirational-item --key '{"id": {"S": "73fe7ef4-ca16-4f8c-8c1b-44ce734ee7da"}}'
 
+
+aws dynamodb delete-table --table-name inspiration-item --endpoint-url http://localhost:8000
+
 ```
